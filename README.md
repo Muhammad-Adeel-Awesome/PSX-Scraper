@@ -7,6 +7,7 @@ An event loop is when we let some stuff that takes a long time do it's thing in 
 ### Execution Times
 | Run  | Synchronous (seconds) | Asynchronous (seconds) | Speedup   |
 |------|-----------------------|------------------------|-----------|
-| 1    | 24.97                 | 2.41                   | **10.4x** |
-| 2    | 29.37                 | 1.38                   | **21.3x** |
-| 3    | 25.62                 | 1.36                   | **18.8x** |
+| 1    | 36.79                 | 4.52                   | **8.1x**  |
+| 2    | 42.65                 | 5.20                   | **8.2x**  |
+| 3    | 30.45                 | 6.14                   | **5.0x**  |
+| Avg  | 36.3                  | 5.29                   | **7.1x**  |
