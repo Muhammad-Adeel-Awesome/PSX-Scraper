@@ -1,8 +1,7 @@
-import asyncio
 from time import perf_counter
 
 import requests
-from company import fetch_sector_companies
+from company import fetch_sector_companies_sync
 from constants import (
     HEADERS,
     PSX_COMPANY_LISTINGS_URL,
@@ -13,7 +12,7 @@ from req_http import http_get_sync
 from soup import extract_sectors, fetch_page_content, get_element_by_class, get_xid
 
 
-async def main():
+def main():
     print("Starting the PSX scraper...")
 
     print("Fetching page content...")
@@ -28,18 +27,19 @@ async def main():
     print("Sectors extracted successfully.")
 
     print("Fetching companies...")
+    companies = []
     with requests.Session() as session:
-        tasks = [
-            fetch_sector_companies(session, sector, SEARCH_COMPANY_URL, HEADERS, xid)
-            for sector in sectors
-        ]
-        results = await asyncio.gather(*tasks)
-    companies = [company for result in results for company in result]
+        for sector in sectors:
+            companies.extend(
+                fetch_sector_companies_sync(
+                    session, sector, SEARCH_COMPANY_URL, HEADERS, xid
+                )
+            )
     print("Companies fetched successfully.")
 
 
 if __name__ == "__main__":
     start_time = perf_counter()
-    asyncio.run(main())
+    main()
     end_time = perf_counter()
     print(f"Time taken: {end_time - start_time:.2f} seconds.")
