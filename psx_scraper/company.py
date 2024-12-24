@@ -17,23 +17,6 @@ class ListedCompany:
     name: str
 
 
-@dataclass
-class AddressBook:
-    company_symbol: str
-    company_name: str
-    representative: str
-    designation: str
-    address: str
-    phone: str
-    phone2: str
-    fax: str
-    date_of_listing: str
-    email: str
-    url: str
-    registrar: str
-    registrar: str
-
-
 def fetch_sector_companies_sync(
     session: Session,
     sector: Sector,
